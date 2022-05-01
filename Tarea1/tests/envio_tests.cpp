@@ -5,7 +5,7 @@
 
 namespace {
 
-    TEST(Envio_Servicio_Postal_Test, Primera_Clase_Test_1) {
+    TEST(Envio_Servicio_Postal, Primera_Clase_Test_1) {
 
         ///AAA
 

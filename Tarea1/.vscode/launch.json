@@ -16,6 +16,19 @@
             "externalConsole": false,
             "MIMode": "gdb", // lldb in Mac, gdb in Linux/WSL
             "preLaunchTask": "Compile the program"
+        },
+        {
+            "name": "g++ - Debug tests",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/tarea1_tests",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb", // lldb in Mac, gdb in Linux/WSL
+            "preLaunchTask": "Compile the tests"
         }
     ]
 }
