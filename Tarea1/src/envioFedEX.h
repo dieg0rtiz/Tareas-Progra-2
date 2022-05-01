@@ -7,6 +7,8 @@ using namespace std;
 
 class EnvioFedEX : public Envio {
 
+    int costoBase = 35.00;
+
     public:
     EnvioFedEX(int peso, int distancia);
 
