@@ -35,7 +35,7 @@ namespace {
         EXPECT_FLOAT_EQ(esperada, actual);
     }
 
-    TEST(Envio_Servicio_Postal, Primera_Clase_Test_3kg_3km) {
+    TEST(Envio_Servicio_Postal, Primera_Clase_Test_3kg_4km) {
 
         ///AAA
 
@@ -155,7 +155,7 @@ namespace {
         EXPECT_FLOAT_EQ(esperada, actual);
     }
 
-    TEST(Envio_Servicio_Postal, Segunda_Clase_Test_3kg_3km) {
+    TEST(Envio_Servicio_Postal, Segunda_Clase_Test_3kg_4km) {
 
         ///AAA
 
@@ -275,7 +275,7 @@ namespace {
         EXPECT_FLOAT_EQ(esperada, actual);
     }
 
-    TEST(Envio_Servicio_Postal, Tercera_Clase_Test_3kg_3km) {
+    TEST(Envio_Servicio_Postal, Tercera_Clase_Test_3kg_4km) {
 
         ///AAA
 
@@ -435,6 +435,41 @@ namespace {
         // Act - ejecute la operación
         float actual = envio->CalcularValor();
         float esperada = 35.00 + 15.00 + 10.00;
+
+        // Assert - valide los resultados
+        EXPECT_FLOAT_EQ(esperada, actual);
+    }
+
+    TEST(Monto_Total_Envios, Test) {
+
+        ///AAA
+
+        // Arrange - configiurar el escenario
+        vector<Envio *> envios;
+
+        EnvioServicioPostal* envio1 = new EnvioServicioPostal(3,4,1); // 0.300*4
+        envios.push_back(envio1);
+
+        EnvioServicioPostal* envio2 = new EnvioServicioPostal(8,8,2); // 0.0530*8
+        envios.push_back(envio2);
+
+        EnvioServicioPostal* envio3 = new EnvioServicioPostal(12,10,3); // 0.0120*10
+        envios.push_back(envio3);
+
+        EnvioFedEX* envio4 = new EnvioFedEX(30,600); // 35.00 + 15.00 + 10.00
+        envios.push_back(envio4);
+
+        EnvioFedEX* envio5 = new EnvioFedEX(25,500); // 35.00 + 10.00
+        envios.push_back(envio5);
+
+        // Act - ejecute la operación
+        float actual = 0;
+
+        for (Envio* envio : envios) {
+            actual += envio->CalcularValor();
+        }
+
+        float esperada = 0.300*4 + 0.0530*8 + 0.0120*10 + 35.00 + 15.00 + 10.00 + 35.00 + 10.00;
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
