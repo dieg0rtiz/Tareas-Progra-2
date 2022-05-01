@@ -3,15 +3,13 @@
 
 class Envio{
     
-    int peso{0};
-    int distancia{0};
-    bool esFedex{0};
-    float valor{0};
+    protected:
+    int peso{0}; // peso en kilogramos
+    int distancia{0}; // distancia en kilometros
 
     public:
-    Envio(int peso, int distancia, bool esFedex);
-    void AsignarPeso(int x);
-    float ObtenerValor();
+    Envio() {};
+    virtual float CalcularValor() = 0;
 };
 
 #endif
