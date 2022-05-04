@@ -30,6 +30,7 @@ int main() {
 
     for (Envio* envio : envios) {
         montoTotalEnvios += envio->CalcularValor();
+        delete envio;
     }
 
     cout << "El monto total de los envíos es de " << montoTotalEnvios << "\n";

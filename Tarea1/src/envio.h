@@ -9,7 +9,9 @@ class Envio{
 
     public:
     Envio() {};
+    virtual ~Envio();
     virtual float CalcularValor() = 0;
+
 };
 
 #endif

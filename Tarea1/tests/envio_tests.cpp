@@ -18,6 +18,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Primera_Clase_Test_1kg_2km) {
@@ -33,6 +34,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Primera_Clase_Test_3kg_4km) {
@@ -48,6 +50,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Primera_Clase_Test_4kg_5km) {
@@ -63,6 +66,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Primera_Clase_Test_6kg_1km) {
@@ -78,6 +82,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Primera_Clase_Test_8kg_8km) {
@@ -93,6 +98,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Primera_Clase_Test_9kg_1km) {
@@ -108,6 +114,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Primera_Clase_Test_12kg_10km) {
@@ -123,6 +130,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Segunda_Clase_Test_0kg_1km) {
@@ -138,6 +146,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Segunda_Clase_Test_1kg_2km) {
@@ -153,6 +162,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Segunda_Clase_Test_3kg_4km) {
@@ -168,6 +178,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Segunda_Clase_Test_4kg_5km) {
@@ -183,6 +194,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Segunda_Clase_Test_6kg_1km) {
@@ -198,6 +210,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Segunda_Clase_Test_8kg_8km) {
@@ -213,6 +226,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Segunda_Clase_Test_9kg_1km) {
@@ -228,6 +242,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Segunda_Clase_Test_12kg_10km) {
@@ -243,6 +258,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Tercera_Clase_Test_0kg_1km) {
@@ -258,6 +274,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Tercera_Clase_Test_1kg_2km) {
@@ -273,6 +290,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Tercera_Clase_Test_3kg_4km) {
@@ -288,6 +306,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Tercera_Clase_Test_4kg_5km) {
@@ -303,6 +322,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Tercera_Clase_Test_6kg_1km) {
@@ -318,6 +338,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Tercera_Clase_Test_8kg_8km) {
@@ -333,6 +354,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Tercera_Clase_Test_9kg_1km) {
@@ -348,6 +370,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_Servicio_Postal, Tercera_Clase_Test_12kg_10km) {
@@ -363,6 +386,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_FedEX, Test_5kg_100km) {
@@ -378,6 +402,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_FedEX, Test_10kg_500km) {
@@ -393,6 +418,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_FedEX, Test_25kg_500km) {
@@ -408,6 +434,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_FedEX, Test_10kg_550km) {
@@ -423,6 +450,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Envio_FedEX, Test_30kg_600km) {
@@ -438,6 +466,7 @@ namespace {
 
         // Assert - valide los resultados
         EXPECT_FLOAT_EQ(esperada, actual);
+        delete envio;
     }
 
     TEST(Monto_Total_Envios, Test) {
@@ -467,6 +496,7 @@ namespace {
 
         for (Envio* envio : envios) {
             actual += envio->CalcularValor();
+            delete envio;
         }
 
         float esperada = 0.300*4 + 0.0530*8 + 0.0120*10 + 35.00 + 15.00 + 10.00 + 35.00 + 10.00;
