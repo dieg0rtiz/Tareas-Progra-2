@@ -15,7 +15,7 @@
 
 5. Para ejecutar las pruebas unitarias, se tienen las siguientes opciones:
 
-    4.1 Compile las pruebas unitarias (ver 2.), luego ejecute la siguiente instrucción: **./bin/tarea1_tests**
+    5.1 Compile las pruebas unitarias (ver 2.), luego ejecute la siguiente instrucción: **./bin/tarea1_tests**
 
-    4.2 En la ventana de *Run and Debug*, seleccione la opción **g++ - Debug tests** y ejecute el depurador. Esta opción le permite utilizar el depurador y añadir puntos de parada en el código del archivo *envio_tests.cpp*
+    5.2 En la ventana de *Run and Debug*, seleccione la opción **g++ - Debug tests** y ejecute el depurador. Esta opción le permite utilizar el depurador y añadir puntos de parada en el código del archivo *envio_tests.cpp*
 
