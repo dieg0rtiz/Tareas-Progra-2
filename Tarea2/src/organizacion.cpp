@@ -32,6 +32,22 @@ Empleado *Organizacion::ObtenerEmpleado(int idEmpleado) {
     return this->indiceEmpleados.at(idEmpleado);
 }
 
+float Organizacion::ObtenerSubTotalAPagar() {
+    float total = 0;
+    for ( auto const& [id,empleado] : this->indiceEmpleados) {
+        total += empleado->ObtenerTotalAPagar();
+    }
+    return total;
+}
+
+float Organizacion::ObtenerImpuestosTotales() {
+    float total = 0;
+    for ( auto const& [id,empleado] : this->indiceEmpleados) {
+        total += empleado->ObtenerImpuestosARetener();
+    }
+    return total;
+}
+
 ostream& operator << (ostream &o, const Organizacion *organizacion) {
 
     for ( auto const& [id,empleado] : organizacion->indiceEmpleados) {
@@ -40,22 +56,3 @@ ostream& operator << (ostream &o, const Organizacion *organizacion) {
 
     return o;
 }
-
-/*
-istream& operator >> (istream &i, Organizacion *organizacion) {
-    
-    string linea;
-
-    while (std::getline(i, linea)) {
-
-        std::istringstream streamLinea(linea);
-
-        Empleado *nuevaEmpleado = new Empleado();
-        streamLinea >> nuevaEmpleado;
-
-        organizacion->AgregarEmpleado(nuevaEmpleado);
-    }
-
-    return i;
-}
-*/

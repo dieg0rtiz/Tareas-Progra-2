@@ -5,31 +5,19 @@ Empleado::Empleado() {
 
 }
 
-Empleado::Empleado(string entrada) {
-/*
-    int idEmpleadoNuevo; 
-    string nombreNuevo; 
-    string apellidoNuevo; 
-    string emailNuevo;
-    int tipoEmpleadoNuevo; 
-    int idSupervisorNuevo;
+Empleado::Empleado(istream *streamEntrada) {
 
-    this->idEmpleado = idEmpleadoNuevo;
-    this->nombre = nombreNuevo;
-    this->apellido = apellidoNuevo;
-    this->email = emailNuevo;
-    this->tipoEmpleado = tipoEmpleadoNuevo;
-    this->idSupervisor = idSupervisorNuevo;
-*/
-    istringstream streamEntrada(entrada);
-
-    streamEntrada
+    *streamEntrada
     >> this->idEmpleado 
     >> this->nombre 
     >> this->apellido
     >> this->email
     >> this->tipoEmpleado
     >> this->idSupervisor;
+
+    if(this->idEmpleado == this->idSupervisor) {
+        this->supervisor = this;
+    }
 
     this->pagoMensualBruto = 0;
     this->impuestosARetener = 0;
@@ -64,26 +52,31 @@ void Empleado::AsignarHorasLaboradas(int nuevoHorasLaboradas) {
     this->horasLaboradas = nuevoHorasLaboradas;
 }
 
-float Empleado::CalcularPago() {
+void Empleado::CalcularPago() {
 
     switch(this->tipoEmpleado) {
 
         case 1:
             this->impuestosARetener = this->pagoMensualBruto*7/100;
             this->totalAPagar = this->pagoMensualBruto - this->impuestosARetener;
-            return this->totalAPagar;
             break;
 
         case 2:
             this->impuestosARetener = 0;
             this->totalAPagar = this->montoPorHora*this->horasLaboradas;
-            return this->totalAPagar;
             break;
 
         default:
-            return this->totalAPagar;
             break;
     }
+}
+
+float Empleado::ObtenerTotalAPagar() {
+    return this->totalAPagar;
+}
+
+float Empleado::ObtenerImpuestosARetener() {
+    return this->impuestosARetener;
 }
 
 string Empleado::ObtenerNombreCompleto() {
@@ -103,26 +96,7 @@ vector <Empleado *> Empleado::ObtenerSubordinados() {
 }
 
 Empleado *Empleado::ObtenerSupervisor() {
-
-    if(this->idEmpleado == this->idSupervisor){
-        return this;
-    }
-    else{
-        return this->supervisor;
-    }
-}
-
-
-istream& operator >> (istream &i, Empleado *empleado) {
-    i 
-    >> empleado->idEmpleado 
-    >> empleado->nombre 
-    >> empleado->apellido
-    >> empleado->email
-    >> empleado->tipoEmpleado
-    >> empleado->idSupervisor;
-
-    return i;
+    return this->supervisor;
 }
 
 ostream& operator << (ostream &o, const Empleado *empleado) {
@@ -130,6 +104,9 @@ ostream& operator << (ostream &o, const Empleado *empleado) {
     << empleado->idEmpleado << "," 
     << empleado->nombre << " " << empleado->apellido << "," // nombre completo
     << empleado->supervisor->nombre << " " << empleado->supervisor->apellido << "," // nombre completo del supervisor
+    // << empleado->tipoEmpleado << ","
+    // << empleado->montoPorHora << ","
+    // << empleado->horasLaboradas << ","
     << empleado->totalAPagar;
 
     return o;

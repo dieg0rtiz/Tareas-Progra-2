@@ -24,12 +24,11 @@ class Empleado {
     vector<Empleado *> subordinados;
     Empleado *supervisor;
 
-
     public:
 
     Empleado();
 
-    Empleado(string entrada);
+    Empleado(istream *streamEntrada);
 
     // Empleado(int idEmpleadoNuevo, string nombreNuevo, string apellidoNuevo, string emailNuevo, int tipoEmpleadoNuevo, int idSupervisorNuevo);
 
@@ -41,7 +40,11 @@ class Empleado {
 
     void AsignarHorasLaboradas(int nuevoHorasLaboradas);
 
-    float CalcularPago();
+    void CalcularPago();
+
+    float ObtenerTotalAPagar();
+
+    float ObtenerImpuestosARetener();
 
     string ObtenerNombreCompleto();
 
@@ -57,8 +60,6 @@ class Empleado {
 
     Empleado *ObtenerSupervisor();
 
-
-    friend istream& operator >> (istream &i, Empleado *empleado);
     friend ostream& operator << (ostream &o, const Empleado *empleado);
 
 };

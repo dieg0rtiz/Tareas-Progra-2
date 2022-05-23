@@ -23,9 +23,12 @@ class Organizacion {
 
     Empleado *ObtenerEmpleado(int idEmpleado);
 
-    friend istream& operator >> (istream &i, Organizacion *organizacion);
+    float ObtenerSubTotalAPagar();
+
+    float ObtenerImpuestosTotales();
+
     friend ostream& operator << (ostream &o, const Organizacion *organizacion);
-    
+
 };
 
 #endif
