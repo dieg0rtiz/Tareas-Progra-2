@@ -1,7 +1,10 @@
 #include "organizacion.h"
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
+
+using namespace std;
 
 Organizacion::Organizacion() {
 
@@ -55,4 +58,25 @@ ostream& operator << (ostream &o, const Organizacion *organizacion) {
     }
 
     return o;
+}
+
+int Organizacion::ImprimirReporte() {
+
+    ofstream ofs("Reporte.csv", std::ifstream::out); // Por default abriendo como texto
+
+    if (!ofs.is_open())
+    {
+        std::cerr << "Error leyendo archivo ejemploEscritura.txt" << std::endl;
+        return -1;
+    }
+
+    ofs << "Reporte de Pagos" << endl;
+    ofs << this << endl;
+    ofs << "Resumen" << endl;
+    ofs << "Subtotal," << this->ObtenerSubTotalAPagar() << endl;
+    ofs << "Impuestos a Retener," << this->ObtenerImpuestosTotales() << endl;
+    ofs << "Total," << this->ObtenerSubTotalAPagar() + this->ObtenerImpuestosTotales() << endl;
+    ofs.close();
+
+    return 0;
 }

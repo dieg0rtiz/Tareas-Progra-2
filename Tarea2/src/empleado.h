@@ -2,7 +2,7 @@
 #define EMPLEADO_H
 
 #include <string>
-#include <iostream>
+#include <sstream>
 
 #include <vector>
 

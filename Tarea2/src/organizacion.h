@@ -2,6 +2,7 @@
 #define ORGANIZACION_H
 
 #include "empleado.h"
+#include <sstream>
 #include <map>
 
 using namespace std;
@@ -28,6 +29,8 @@ class Organizacion {
     float ObtenerImpuestosTotales();
 
     friend ostream& operator << (ostream &o, const Organizacion *organizacion);
+
+    int ImprimirReporte();
 
 };
 

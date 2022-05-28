@@ -82,6 +82,8 @@ int main() {
 
     ifsHorasTrabajadas.close();
 
+    organizacion->ImprimirReporte();
+
     cout << "Reporte" << std::endl;
     cout << "ID_Empleado,Nombre_Completo_Empleado,Nombre_Completo_Supervisor,Monto_A_Pagar" << std::endl;
     cout << organizacion;
