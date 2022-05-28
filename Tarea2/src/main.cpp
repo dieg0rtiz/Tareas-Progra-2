@@ -84,15 +84,5 @@ int main() {
 
     organizacion->ImprimirReporte();
 
-    cout << "Reporte" << std::endl;
-    cout << "ID_Empleado,Nombre_Completo_Empleado,Nombre_Completo_Supervisor,Monto_A_Pagar" << std::endl;
-    cout << organizacion;
-    cout << std::endl;
-    cout << "Resumen" << std::endl;
-    cout << "Subtotal: " << organizacion->ObtenerSubTotalAPagar() << " "
-        << "Impuestos a Retener: " << organizacion->ObtenerImpuestosTotales() << " "
-        << "Total: " << organizacion->ObtenerSubTotalAPagar() + organizacion->ObtenerImpuestosTotales()
-         << std::endl;
-
     delete organizacion;
 }
