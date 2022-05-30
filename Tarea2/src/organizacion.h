@@ -9,6 +9,10 @@ using namespace std;
 
 class Organizacion {
 
+    vector<tuple<int, string, string, int, int>> vectorPersonas;
+    vector<tuple<int, float>> vectorNomina;
+    vector<tuple<int, float, int>> vectorHorasTrabajadas;
+
     Empleado *director;
     map<int, Empleado *> indiceEmpleados;
 
@@ -16,17 +20,15 @@ class Organizacion {
 
     Organizacion();
 
-    Organizacion(Empleado *nuevoDirector);
-
     ~Organizacion();
 
-    void AgregarEmpleado(Empleado *nuevoEmpleado, int idSupervisor);
+    void AgregarEmpleado(Empleado *nuevoEmpleado);
 
-    Empleado *ObtenerEmpleado(int idEmpleado);
+    void AgregarDatosDePago (string entrada);
 
-    float ObtenerSubTotalAPagar();
+    float CalcularSubTotalAPagar();
 
-    float ObtenerImpuestosTotales();
+    float CalcularImpuestosTotales();
 
     friend ostream& operator << (ostream &o, const Organizacion *organizacion);
 

@@ -1,52 +1,58 @@
 #include "organizacion.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 Organizacion::Organizacion() {
-
-}
-
-Organizacion::Organizacion(Empleado *nuevoDirector) {
-    this->director = nuevoDirector;
-    this->director->AsignarSupervisor(nuevoDirector);
-    this->indiceEmpleados.insert( std::pair<int, Empleado *>(nuevoDirector->ObtenerID(), this->director) );
+    this->director = nullptr;
 }
 
 Organizacion::~Organizacion() {
     delete this->director;
 }
 
-void Organizacion::AgregarEmpleado(Empleado *nuevoEmpleado, int idSupervisor) {
+void Organizacion::AgregarEmpleado(Empleado *nuevoEmpleado) {
+    int idSupervisor = nuevoEmpleado->ObtenerIDSupervisor();
+
+    if(this->director == nullptr) {
+        this->director = nuevoEmpleado;
+        this->director->AsignarSupervisor(nuevoEmpleado);
+        this->indiceEmpleados.insert( std::pair<int, Empleado *>(nuevoEmpleado->ObtenerID(), this->director) );
+    }
     
-    Empleado *supervisor = this->indiceEmpleados.at(idSupervisor);
-
-    supervisor->AgregarSubordinado(nuevoEmpleado);
-
-    nuevoEmpleado->AsignarSupervisor(supervisor);
-
-    this->indiceEmpleados.insert( std::pair<int, Empleado *>(nuevoEmpleado->ObtenerID(), nuevoEmpleado) );
+    else {
+        Empleado *supervisor = this->indiceEmpleados.at(idSupervisor);
+        supervisor->AgregarSubordinado(nuevoEmpleado);
+        nuevoEmpleado->AsignarSupervisor(supervisor);
+        this->indiceEmpleados.insert( std::pair<int, Empleado *>(nuevoEmpleado->ObtenerID(), nuevoEmpleado) );
+    }
 }
 
-Empleado *Organizacion::ObtenerEmpleado(int idEmpleado) {
-    return this->indiceEmpleados.at(idEmpleado);
+void Organizacion::AgregarDatosDePago(string entrada) {
+    int id;
+    istringstream strm(entrada);
+    strm >> id;    
+    this->indiceEmpleados.at(id)->AgregarDatosDePago(strm.str());   
+    this->indiceEmpleados.at(id)->CalcularPago(); 
 }
 
-float Organizacion::ObtenerSubTotalAPagar() {
+float Organizacion::CalcularSubTotalAPagar() {
     float total = 0;
     for ( auto const& [id,empleado] : this->indiceEmpleados) {
-        total += empleado->ObtenerTotalAPagar();
+        total += empleado->CalcularPago();
     }
     return total;
 }
 
-float Organizacion::ObtenerImpuestosTotales() {
+float Organizacion::CalcularImpuestosTotales() {
     float total = 0;
     for ( auto const& [id,empleado] : this->indiceEmpleados) {
-        total += empleado->ObtenerImpuestosARetener();
+        total += empleado->CalcularImpuestos();
     }
     return total;
 }
@@ -62,20 +68,20 @@ ostream& operator << (ostream &o, const Organizacion *organizacion) {
 
 int Organizacion::ImprimirReporte() {
 
-    ofstream ofs("Reporte.csv", std::ifstream::out); // Por default abriendo como texto
+    ofstream ofs("Reporte.csv", std::ifstream::out);
 
     if (!ofs.is_open())
     {
-        std::cerr << "Error leyendo archivo ejemploEscritura.txt" << std::endl;
+        std::cerr << "Error leyendo archivo Reporte.csv" << std::endl;
         return -1;
     }
 
     ofs << "Reporte de Pagos" << endl;
     ofs << this << endl;
     ofs << "Resumen" << endl;
-    ofs << "Subtotal," << this->ObtenerSubTotalAPagar() << endl;
-    ofs << "Impuestos a Retener," << this->ObtenerImpuestosTotales() << endl;
-    ofs << "Total," << this->ObtenerSubTotalAPagar() + this->ObtenerImpuestosTotales() << endl;
+    ofs << "Subtotal," << this->CalcularSubTotalAPagar() << endl;
+    ofs << "Impuestos a Retener," << this->CalcularImpuestosTotales() << endl;
+    ofs << "Total," << this->CalcularSubTotalAPagar() + this->CalcularImpuestosTotales() << endl;
     ofs.close();
 
     return 0;
