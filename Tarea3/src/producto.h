@@ -8,10 +8,11 @@ using namespace std;
 class Producto {
 
     int id {};
-    string nombre {};
+    char nombre [20] {};
     int existencias;
 
     public:
+    Producto();
     Producto(int id, string nombre, int existenxias);
     ~Producto();
 

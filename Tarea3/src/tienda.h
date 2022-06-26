@@ -6,11 +6,21 @@
 #include <vector>
 
 class Tienda {
-    string nombre {};
-    string direccionInternet {};
-    string direccionFisica {};
-    string telefono {};
+
+    char nombre [15] {};
+    char direccionInternet [24] {};
+    char direccionFisica [24] {};
+    char telefono [8] {};
     vector <Producto *> productos; 
+
+    public:
+    Tienda();
+
+    Tienda(string nuevoNombre, string nuevaDireccionInternet, string nuevaDireccionFisica, string nuevoTelefono);
+
+    ~Tienda();
+
+    void AgregarProducto(Producto *producto);
 
 };
 
