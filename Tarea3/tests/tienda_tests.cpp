@@ -141,4 +141,34 @@ namespace {
         EXPECT_EQ(existenciasActual, existenciasEsperado);
         delete tienda;
     }
+
+    TEST(Tienda_Test, Test_Guardar_Y_Cargar_Datos) { 
+
+        ///AAA
+
+        // Arrange - configiurar el escenario
+        Tienda *tienda1 = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "1234567");
+        tienda1->AgregarProducto(1, "manzana amarilla", 250);
+        tienda1->AgregarProducto(2, "manzana roja", 125);
+        tienda1->AgregarProducto(3, "manzana verde", 75);
+
+        Tienda *tienda2 = new Tienda();
+
+        // Act - ejecute la operación
+        tienda1->GuardarDatos("MiTienda");
+        tienda2->CargarDatos("MiTienda");
+
+        string tienda1InfoString = tienda1->ObtenerInformacionTienda();
+        string tienda2InfoString = tienda2->ObtenerInformacionTienda();
+
+        string tienda1ListaString = tienda1->ObtenerListaProductos();
+        string tienda2ListaString = tienda2->ObtenerListaProductos();
+
+        // Assert - valide los resultados
+        EXPECT_EQ(tienda1InfoString, tienda2InfoString);
+        EXPECT_EQ(tienda1ListaString, tienda2ListaString);
+
+        delete tienda1;
+        delete tienda2;
+    }
 }

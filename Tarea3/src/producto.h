@@ -10,9 +10,10 @@ class Producto {
 
     int id {};
     char nombre [20] {};
-    int existencias;
+    int existencias {};
 
     public:
+    Producto();
     Producto(int id, string nombre, int existencias);
     ~Producto();
     int ObtenerID();
