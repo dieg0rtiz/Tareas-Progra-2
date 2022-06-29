@@ -24,6 +24,10 @@ string Producto::ObtenerNombre(){
     return this->nombre;
 }
 
+void Producto::ActualizarNombre(string nuevoNombre){
+    strcpy(this->nombre, nuevoNombre.c_str());
+}
+
 int Producto::ObtenerExistencias(){
     return this->existencias;
 }

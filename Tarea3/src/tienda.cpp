@@ -164,20 +164,20 @@ int Tienda::CargarDatos(string nombreArchivo) {
 
     archivoEntrada.seekg(0, std::ios::beg);
 
-    char nuevoNombre [15];
-    archivoEntrada.read((char *)nuevoNombre,15);
+    char nuevoNombre [sizeof(this->nombre)];
+    archivoEntrada.read((char *)nuevoNombre,sizeof(this->nombre));
     this->ActualizarNombre(nuevoNombre);
 
-    char nuevaDireccionInternet [24];
-    archivoEntrada.read(nuevaDireccionInternet,24);
+    char nuevaDireccionInternet [sizeof(this->direccionInternet)];
+    archivoEntrada.read(nuevaDireccionInternet,sizeof(this->direccionInternet));
     this->ActualizarDireccionInternet(nuevaDireccionInternet);
 
-    char nuevaDireccionFisica [24];
-    archivoEntrada.read(nuevaDireccionFisica,24);
+    char nuevaDireccionFisica [sizeof(this->direccionFisica)];
+    archivoEntrada.read(nuevaDireccionFisica,sizeof(this->direccionFisica));
     this->ActualizarDireccionFisica(nuevaDireccionFisica);
 
-    char nuevoTelefono [8];
-    archivoEntrada.read(nuevoTelefono,8);
+    char nuevoTelefono [sizeof(this->telefono)];
+    archivoEntrada.read(nuevoTelefono,sizeof(this->telefono));
     this->ActualizarTelefono(nuevoTelefono);
 
     for (int i=0; i < cantidadProductos; i++) {

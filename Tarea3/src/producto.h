@@ -18,6 +18,7 @@ class Producto {
     ~Producto();
     int ObtenerID();
     string ObtenerNombre();
+    void ActualizarNombre(string nuevoNombre);
     int ObtenerExistencias();
     void ActualizarExistencias(int nuevaCantidad);
     friend ostream& operator << (ostream &o, const Producto *producto);
