@@ -5,6 +5,6 @@
 
 2. Para compilar las pruebas unitarias, ejecute la instrucción: **make test**
 
-3. Para borrar las carpetas bin y obj junto con sus contenidos, ejecute la instrucción: **make clean**
+3. Para borrar las carpetas bin y obj, junto con sus contenidos, ejecute la instrucción: **make clean**
 
 5. Para ejecutar las pruebas unitarias, compile las pruebas unitarias (ver 2.) y luego ejecute la siguiente instrucción: **./bin/tarea3_tests**
