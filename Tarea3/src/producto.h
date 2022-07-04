@@ -4,12 +4,17 @@
 #include <string>
 #include <sstream>
 
+#include <exception>
+#include "excepcionNumeroNegativo.h"
+#include "excepcionCantidadDeCaracteresProducto.h"
+
 using namespace std;
 
 class Producto {
 
+    // Se controla la cantidad de caracteres ingresados por medio de excepciones.
     int id {};
-    char nombre [20] {};
+    char nombre [21] {}; // 20 caracteres para el usuario, un bit extra para guardar el caracter final \0. 
     int existencias {};
 
     public:

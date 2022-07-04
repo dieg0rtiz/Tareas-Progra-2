@@ -9,8 +9,8 @@ namespace {
 
         // Arrange - configiurar el escenario
         Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
-        tienda->AgregarProducto(1, "manzana amarilla grande", 250);
-        tienda->AgregarProducto(2, "manzana roja grande", 125);
+        tienda->AgregarProducto(1, "manzana amarilla", 250);
+        tienda->AgregarProducto(2, "manzana roja", 125);
 
         // Act - ejecute la operación
         string nombreActual = tienda->ObtenerNombre();
@@ -38,12 +38,12 @@ namespace {
 
         // Arrange - configiurar el escenario
         Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
-        tienda->AgregarProducto(1, "manzana amarilla grande", 250);
-        tienda->AgregarProducto(2, "manzana roja grande", 125);
+        tienda->AgregarProducto(1, "manzana amarilla", 250);
+        tienda->AgregarProducto(2, "manzana roja", 125);
 
         // Act - ejecute la operación
         string infoProducto1Actual = tienda->ObtenerInformacionProducto(1);
-        string infoProducto1Esperado = "1,manzana amarilla gra\xFA,250";
+        string infoProducto1Esperado = "1,manzana amarilla,250";
 
         // Assert - valide los resultados
         EXPECT_EQ(infoProducto1Actual, infoProducto1Esperado);
@@ -56,8 +56,8 @@ namespace {
 
         // Arrange - configiurar el escenario
         Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
-        tienda->AgregarProducto(1, "manzana amarilla grande", 250);
-        tienda->AgregarProducto(2, "manzana roja grande", 125);
+        tienda->AgregarProducto(1, "manzana amarilla", 250);
+        tienda->AgregarProducto(2, "manzana roja", 125);
 
         // Act - ejecute la operación
         string infoTiendaActual = tienda->ObtenerInformacionTienda();
@@ -170,5 +170,241 @@ namespace {
 
         delete tienda1;
         delete tienda2;
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Tienda_Constructor_Nombre) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            Tienda *tienda = new Tienda("Este string es tiene un nombre muy largo", "mitienda.com", "Avenida X Calle Y", "88888888");
+            delete tienda;           
+        }, ExcepcionCantidadDeCaracteresTienda);
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Tienda_Constructor_Direccion_Internet) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            Tienda *tienda = new Tienda("Mi Tienda", "Este string es tiene un nombre muy largo", "Avenida X Calle Y", "88888888");
+            delete tienda;           
+        }, ExcepcionCantidadDeCaracteresTienda);
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Tienda_Constructor_Diereccion_Fisica) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Este string es tiene un nombre muy largo", "88888888");
+            delete tienda;           
+        }, ExcepcionCantidadDeCaracteresTienda);
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Tienda_Constructor_Telefono) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "999999999");
+            delete tienda;           
+        }, ExcepcionCantidadDeCaracteresTienda);
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Tienda_Actualizar_Nombre) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->ActualizarNombre("Este string es tiene un nombre muy largo");          
+        }, ExcepcionCantidadDeCaracteresTienda);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Tienda_Actualizar_Direccion_Internet) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->ActualizarDireccionInternet("Este string es tiene un nombre muy largo");          
+        }, ExcepcionCantidadDeCaracteresTienda);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Tienda_Actualizar_Direccion_Fisica) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->ActualizarDireccionFisica("Este string es tiene un nombre muy largo");          
+        }, ExcepcionCantidadDeCaracteresTienda);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Tienda_Actualizar_Telefono) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->ActualizarTelefono("999999999");          
+        }, ExcepcionCantidadDeCaracteresTienda);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Producto_Agregar_Producto) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->AgregarProducto(1,"Este string es muy largo",250);          
+        }, ExcepcionCantidadDeCaracteresProducto);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_ID_Negativo_Agregar_Producto) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->AgregarProducto(-1,"manzana amarilla",250);          
+        }, ExcepcionNumeroNegativo);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Negativa_Agregar_Producto) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->AgregarProducto(1,"manzana amarilla",-250);          
+        }, ExcepcionNumeroNegativo);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Negativa_Actualizar_Existencias_Producto) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+        tienda->AgregarProducto(1,"manzana amarilla",250); 
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->ActualizarExistenciasProducto(1,-100);          
+        }, ExcepcionNumeroNegativo);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_ID_Negativo_Actualizar_Existencias_Producto) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+        tienda->AgregarProducto(1,"manzana amarilla",250); 
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->ActualizarExistenciasProducto(-1,100);          
+        }, ExcepcionNumeroNegativo);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_Cantidad_Caracteres_Producto_Actualizar_Nombre_Producto) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+        tienda->AgregarProducto(1,"manzana amarilla",250);  
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->ActualizarNombreProducto(1,"Este string es muy largo");
+        }, ExcepcionCantidadDeCaracteresProducto);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
+    }
+
+    TEST(Tienda_Test, Test_ID_Negativo_Actualizar_Nombre_Producto) {
+        /// AAA
+
+        // Arrange - configurar el escenario
+        Tienda *tienda = new Tienda("Mi Tienda", "mitienda.com", "Avenida X Calle Y", "88888888");
+        tienda->AgregarProducto(1,"manzana amarilla",250);  
+
+        // Act - ejecute la operación
+        EXPECT_THROW({
+            tienda->ActualizarNombreProducto(-1,"manzana roja");
+        }, ExcepcionNumeroNegativo);
+
+        delete tienda; 
+
+        // Assert - valide los resultados  
     }
 }

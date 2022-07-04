@@ -9,12 +9,18 @@
 #include <iostream>
 #include <fstream>
 
-class Tienda {
+#include <exception>
+#include "excepcionNumeroNegativo.h"
+#include "excepcionCantidadDeCaracteresProducto.h"
+#include "excepcionCantidadDeCaracteresTienda.h"
 
-    char nombre [15] {};
-    char direccionInternet [24] {};
-    char direccionFisica [24] {};
-    char telefono [8] {};
+class Tienda {
+    
+    // Se controla la cantidad de caracteres ingresados por medio de excepciones.
+    char nombre [16] {}; // 15 caracteres para el usuario, un bit extra para guardar el caracter final \0. 
+    char direccionInternet [25] {}; // 24 caracteres para el usuario, un bit extra para guardar el caracter final \0. 
+    char direccionFisica [25] {}; // 24 caracteres para el usuario, un bit extra para guardar el caracter final \0. 
+    char telefono [9] {}; // 8 caracteres para el usuario, un bit extra para guardar el caracter final \0. 
     map<int, Producto *> indiceProductos;
 
     public:
@@ -34,6 +40,7 @@ class Tienda {
     string ObtenerInformacionProducto(int id);
     void EliminarProducto(int id);
     void ActualizarExistenciasProducto(int id, int nuevaCantidad);
+    void ActualizarNombreProducto(int id, string nuevoNombre);
     string ObtenerInformacionTienda();
     string ObtenerListaProductos();
     friend ostream& operator << (ostream &o, const Tienda *tienda);
