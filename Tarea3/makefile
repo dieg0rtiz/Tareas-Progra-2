@@ -8,6 +8,10 @@ all:
 	g++ -shared -o bin/libtienda.so obj/producto.o obj/tienda.o
 	mkdir -p bin/include
 	cp src/tienda.h ./bin/include
+	cp src/producto.h ./bin/include
+	cp src/excepcionCantidadDeCaracteresProducto.h ./bin/include
+	cp src/excepcionCantidadDeCaracteresTienda.h ./bin/include
+	cp src/excepcionNumeroNegativo.h ./bin/include
 
 test:
 	mkdir -p obj
