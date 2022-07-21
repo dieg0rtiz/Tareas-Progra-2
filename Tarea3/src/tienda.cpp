@@ -250,3 +250,11 @@ int Tienda::CargarDatos(string nombreArchivo) {
 
     return 0;
 }
+
+string Tienda::ObtenerDatosYProductos() {
+    string datos {};
+    datos += this->ObtenerInformacionTienda();
+    datos += "\n\n";
+    datos += this->ObtenerListaProductos();
+    return datos;
+}

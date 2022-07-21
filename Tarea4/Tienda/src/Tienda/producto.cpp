@@ -1,6 +1,8 @@
 #include "producto.h"
+#include "espacios.h"
 
 #include <cstring>
+#include <string>
 
 Producto::Producto() {
 
@@ -37,11 +39,15 @@ void Producto::ActualizarExistencias(int nuevaCantidad){
 }
 
 ostream& operator << (ostream &o, const Producto *producto) {
+    Espacios *espacios = new Espacios();
+    string nombreString = producto->nombre;
+
     o
-    << producto->id << ","
-    << producto->nombre << ","
+    << producto->id << "    "
+    << producto->nombre << espacios->AgregarEspacios(4 + sizeof(producto->nombre) - nombreString.size())
     << producto->existencias;
 
+    delete espacios;
     return o;
 }
 

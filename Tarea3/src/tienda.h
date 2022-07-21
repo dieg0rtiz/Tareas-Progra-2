@@ -47,6 +47,7 @@ class Tienda {
     int ObtenerExistenciasProducto(int id);
     int GuardarDatos(string nombreArchivo);
     int CargarDatos(string nombreArchivo);
+    string ObtenerDatosYProductos();
 };
 
 #endif

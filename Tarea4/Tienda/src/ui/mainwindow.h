@@ -23,6 +23,8 @@ private slots:
 
     void on_AbrirArchivo_clicked();
 
+    void on_Guardar_clicked();
+
 private:
     Ui::MainWindow *ui;
     Tienda *tienda;

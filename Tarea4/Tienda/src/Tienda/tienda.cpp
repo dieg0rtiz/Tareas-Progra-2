@@ -1,4 +1,5 @@
 #include "tienda.h"
+#include "espacios.h"
 
 using namespace std;
 
@@ -91,7 +92,7 @@ string Tienda::ObtenerInformacionTienda() {
 string Tienda::ObtenerListaProductos() {
     stringstream strm("");
 
-    strm << "ID,Nombre,Existencias" << endl;
+    strm << "ID     Nombre              Existencias" << endl;
 
     for (auto const& [id,producto] : this->indiceProductos) {
         strm << producto << endl;
@@ -152,11 +153,11 @@ int Tienda::CargarDatos(string nombreArchivo) {
     string nombreArchivoExtension = nombreArchivo + ".dat";
     ifstream archivoEntrada;
 
-    archivoEntrada.open(nombreArchivoExtension, ios::in|ios::binary);
+    archivoEntrada.open(nombreArchivo, ios::in|ios::binary);
 
     if (!archivoEntrada.is_open())
     {
-        cerr << "No se pudo abrir archivo " + nombreArchivoExtension + " para leer los datos";
+        cerr << "No se pudo abrir archivo " + nombreArchivo + " para leer los datos";
         return -1;
     }
 
@@ -191,4 +192,12 @@ int Tienda::CargarDatos(string nombreArchivo) {
     archivoEntrada.close();
 
     return 0;
+}
+
+string Tienda::ObtenerDatosYProductos() {
+    string datos {};
+    datos += this->ObtenerInformacionTienda();
+    datos += "\n\n";
+    datos += this->ObtenerListaProductos();
+    return datos;
 }
