@@ -58,7 +58,7 @@ ostream& operator << (ostream &o, const Producto *producto) {
 
     o
     << producto->id << "    "
-    << producto->nombre << espacios->AgregarEspacios(38 - idString.size() - 4 - nombreString.size() - cantidadString.size())
+    << producto->nombre << espacios->AgregarEspacios(40 - idString.size() - 4 - nombreString.size() - cantidadString.size())
     << producto->existencias;
 
     delete espacios;

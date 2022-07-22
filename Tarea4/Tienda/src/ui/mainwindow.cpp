@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "./../Tienda/tienda.h"
-#include "formdatostienda.h"
 #include "formproducto.h"
 #include "formid.h"
 #include <QMessageBox>
@@ -38,61 +37,6 @@ void MainWindow::ActualizarVentanaInfo()
 
     QString stringInfoTienda = QString::fromStdString(tienda->ObtenerDatosYProductos());
     ui->txtBrwsVentanaInfoTienda->setText(stringInfoTienda);
-}
-
-void MainWindow::on_ActualizarDatos_clicked()
-{
-    std::string nombre = tienda->ObtenerNombre();
-    std::string direccionInternet = tienda->ObtenerDireccionInternet();
-    std::string direccionFisica = tienda->ObtenerDireccionFisica();
-    std::string telefono = tienda->ObtenerTelefono();
-
-    FormDatosTienda formDatos(this);
-    formDatos.CargarDatos(nombre, direccionInternet, direccionFisica, telefono);
-    int result = formDatos.exec();
-
-    if(result == QDialog::Accepted)
-    {
-        try
-        {
-            QString stringTelefono = QString::fromStdString(formDatos.ObtenerTelefono());
-            bool ok = false;
-            int numeroTelefono = stringTelefono.toInt(&ok);
-
-            if(!ok || numeroTelefono < 0)
-            {
-                throw "Error";
-            }
-
-            this->tienda->ActualizarNombre(formDatos.ObtenerNombre());
-            this->tienda->ActualizarDireccionInternet(formDatos.ObtenerPaginaWeb());
-            this->tienda->ActualizarDireccionFisica(formDatos.ObtenerDireccionFisica());
-            this->tienda->ActualizarTelefono(formDatos.ObtenerTelefono());
-
-            this->ActualizarVentanaInfo();
-
-            QMessageBox *msgbox = new QMessageBox(this);
-            msgbox->setWindowTitle("Resultado");
-            msgbox->setText("Los datos se han actualizado");
-            msgbox->open();
-        }
-
-        catch(char const *message)
-        {
-            QMessageBox *msgbox = new QMessageBox(this);
-            msgbox->setWindowTitle("Error");
-            msgbox->setText("El teléfono solamente puede contener caracteres numéricos.\nLos datos NO se actualizaron");
-            msgbox->open();
-        }
-
-    }
-    else
-    {
-        QMessageBox *msgbox = new QMessageBox(this);
-        msgbox->setWindowTitle("Resultado");
-        msgbox->setText("Acción cancelada. Los datos NO se actualizaron");
-        msgbox->open();
-    }
 }
 
 void MainWindow::on_AbrirArchivo_clicked()
