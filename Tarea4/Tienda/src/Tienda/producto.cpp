@@ -41,10 +41,12 @@ void Producto::ActualizarExistencias(int nuevaCantidad){
 ostream& operator << (ostream &o, const Producto *producto) {
     Espacios *espacios = new Espacios();
     string nombreString = producto->nombre;
+    string idString = to_string(producto->id);
+    string cantidadString = to_string(producto->existencias);
 
     o
     << producto->id << "    "
-    << producto->nombre << espacios->AgregarEspacios(4 + sizeof(producto->nombre) - nombreString.size())
+    << producto->nombre << espacios->AgregarEspacios(38 - idString.size() - 4 - nombreString.size() - cantidadString.size())
     << producto->existencias;
 
     delete espacios;

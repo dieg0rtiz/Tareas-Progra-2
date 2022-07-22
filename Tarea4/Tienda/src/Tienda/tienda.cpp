@@ -8,6 +8,17 @@ Tienda::Tienda() {
 }
 
 Tienda::Tienda(string nuevoNombre, string nuevaDireccionInternet, string nuevaDireccionFisica, string nuevoTelefono) {
+
+    if (nuevoNombre.length()>= sizeof(this->nombre) ||
+        nuevaDireccionInternet.length()>= sizeof(this->direccionInternet) ||
+        nuevaDireccionFisica.length()>= sizeof(this->direccionFisica) ||
+        nuevoTelefono.length()>= sizeof(this->telefono)
+        )
+    {
+        // Escenario de excepción
+        throw ExcepcionCantidadDeCaracteresTienda();
+    }
+
     strncpy(this->nombre, nuevoNombre.c_str(),sizeof(this->nombre)-1);
     strncpy(this->direccionInternet, nuevaDireccionInternet.c_str(),sizeof(this->direccionInternet)-1);
     strncpy(this->direccionFisica, nuevaDireccionFisica.c_str(),sizeof(this->direccionFisica)-1);
@@ -37,22 +48,46 @@ string Tienda::ObtenerTelefono() {
 }
 
 void Tienda::ActualizarNombre(string nuevoNombre) {
+
+    if (nuevoNombre.length()>= sizeof(this->nombre)) {
+        // Escenario de excepción
+        throw ExcepcionCantidadDeCaracteresTienda();
+    }
+
     strncpy(this->nombre, nuevoNombre.c_str(),sizeof(this->nombre)-1);
 }
 
 void Tienda::ActualizarDireccionInternet(string nuevaDireccionInternet) {
+
+    if (nuevaDireccionInternet.length()>= sizeof(this->direccionInternet)) {
+        // Escenario de excepción
+        throw ExcepcionCantidadDeCaracteresTienda();
+    }
+
     strncpy(this->direccionInternet, nuevaDireccionInternet.c_str(),sizeof(this->direccionInternet)-1);
 }
 
 void Tienda::ActualizarDireccionFisica(string nuevaDireccionFisica) {
+
+    if (nuevaDireccionFisica.length()>= sizeof(this->direccionFisica)) {
+        // Escenario de excepción
+        throw ExcepcionCantidadDeCaracteresTienda();
+    }
+
     strncpy(this->direccionFisica, nuevaDireccionFisica.c_str(),sizeof(this->direccionFisica)-1);
 }
 
 void Tienda::ActualizarTelefono(string nuevoTelefono) {
+
+    if (nuevoTelefono.length()>= sizeof(this->telefono)) {
+        // Escenario de excepción
+        throw ExcepcionCantidadDeCaracteresTienda();
+    }
+
     strncpy(this->telefono, nuevoTelefono.c_str(),sizeof(this->telefono)-1);
 }
 
-void Tienda::AgregarProducto(int id, string nombre, int existencias) {
+void Tienda::AgregarProducto(int id, string nombre, int existencias) { 
     Producto *producto = new Producto(id, nombre, existencias);
     this->indiceProductos.insert( pair<int, Producto *>(producto->ObtenerID(), producto) );
 }
@@ -62,19 +97,47 @@ void Tienda::AgregarProducto(Producto *producto) {
 }
 
 void Tienda::EliminarProducto(int id) {
+
+    if (!this->VerificarProducto(id))
+    {
+        // Escenario de excepción
+        throw ExcepcionProductoInexistente();
+    }
+
     delete this->indiceProductos.at(id);
     this->indiceProductos.erase(id);
 }
 
 string Tienda::ObtenerInformacionProducto(int id) {
+
+    if (!this->VerificarProducto(id))
+    {
+        // Escenario de excepción
+        throw ExcepcionProductoInexistente();
+    }
+
     return this->indiceProductos.at(id)->ObtenerInformacionProducto();
 }
 
 void Tienda::ActualizarExistenciasProducto(int id, int nuevaCantidad) {
+
+    if (!this->VerificarProducto(id))
+    {
+        // Escenario de excepción
+        throw ExcepcionProductoInexistente();
+    }
+
     this->indiceProductos.at(id)->ActualizarExistencias(nuevaCantidad);
 }
 
 void Tienda::ActualizarNombreProducto(int id, string nuevoNombre) {
+
+    if (!this->VerificarProducto(id))
+    {
+        // Escenario de excepción
+        throw ExcepcionProductoInexistente();
+    }
+
     this->indiceProductos.at(id)->ActualizarNombre(nuevoNombre);
 }
 
@@ -92,7 +155,7 @@ string Tienda::ObtenerInformacionTienda() {
 string Tienda::ObtenerListaProductos() {
     stringstream strm("");
 
-    strm << "ID     Nombre              Existencias" << endl;
+    strm << "ID            Nombre            Existencias" << endl;
 
     for (auto const& [id,producto] : this->indiceProductos) {
         strm << producto << endl;
@@ -124,13 +187,12 @@ int Tienda::ObtenerExistenciasProducto(int id) {
 
 int Tienda::GuardarDatos(string nombreArchivo) {
 
-    string nombreArchivoExtension = nombreArchivo + ".dat";
     ofstream archivoSalida;
 
-    archivoSalida.open(nombreArchivoExtension, ios::out|ios::binary);
+    archivoSalida.open(nombreArchivo, ios::out|ios::binary);
 
     if (!archivoSalida.is_open()) {
-        cerr << "No se pudo abrir archivo " + nombreArchivoExtension + " para escribir los datos";
+        cerr << "No se pudo abrir archivo " + nombreArchivo + " para escribir los datos";
         return -1;
     }
 
@@ -150,7 +212,6 @@ int Tienda::GuardarDatos(string nombreArchivo) {
 
 int Tienda::CargarDatos(string nombreArchivo) {
 
-    string nombreArchivoExtension = nombreArchivo + ".dat";
     ifstream archivoEntrada;
 
     archivoEntrada.open(nombreArchivo, ios::in|ios::binary);
@@ -200,4 +261,17 @@ string Tienda::ObtenerDatosYProductos() {
     datos += "\n\n";
     datos += this->ObtenerListaProductos();
     return datos;
+}
+
+bool Tienda::VerificarProducto(int idParaVerificar) {
+    bool productoExiste = false;
+
+    for (auto const& [id,producto] : this->indiceProductos) {
+        if(idParaVerificar == id) {
+            productoExiste = true;
+            break;
+        }
+    }
+
+    return productoExiste;
 }

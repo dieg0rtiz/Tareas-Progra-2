@@ -10,15 +10,18 @@ CONFIG += c++17
 
 SOURCES += \
     formdatostienda.cpp \
+    formproducto.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     formdatostienda.h \
+    formproducto.h \
     mainwindow.h
 
 FORMS += \
     formdatostienda.ui \
+    formproducto.ui \
     mainwindow.ui
 
 # Default rules for deployment.

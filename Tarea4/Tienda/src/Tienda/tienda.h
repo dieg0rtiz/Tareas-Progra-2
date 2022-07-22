@@ -9,6 +9,10 @@
 #include <iostream>
 #include <fstream>
 
+#include <exception>
+#include "excepcionCantidadDeCaracteresTienda.h"
+#include "excepcionProductoInexistente.h"
+
 class Tienda {
 
     // Se controla la cantidad de caracteres ingresados por medio de excepciones.
@@ -43,6 +47,7 @@ class Tienda {
     int GuardarDatos(string nombreArchivo);
     int CargarDatos(string nombreArchivo);
     string ObtenerDatosYProductos();
+    bool VerificarProducto(int idParaVerificar);
 };
 
 #endif // TIENDA_H

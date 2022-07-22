@@ -40,18 +40,49 @@ void MainWindow::on_ActualizarDatos_clicked()
 
     if(result == QDialog::Accepted)
     {
-        this->tienda->ActualizarNombre(formDatos.ObtenerNombre());
-        this->tienda->ActualizarDireccionInternet(formDatos.ObtenerPaginaWeb());
-        this->tienda->ActualizarDireccionFisica(formDatos.ObtenerDireccionFisica());
-        this->tienda->ActualizarTelefono(formDatos.ObtenerTelefono());
+        try
+        {
+            QString stringTelefono = QString::fromStdString(formDatos.ObtenerTelefono());
+            bool ok = false;
+            int numeroTelefono = stringTelefono.toInt(&ok);
 
-        QString stringInfoTienda = QString::fromStdString(tienda->ObtenerDatosYProductos());
-        ui->txtBrwsVentanaInfoTienda->setText(stringInfoTienda);
+            if(!ok || numeroTelefono < 0)
+            {
+                throw "Error";
+            }
 
-        QMessageBox *msgbox = new QMessageBox(this);
-        msgbox->setWindowTitle("Resultado");
-        msgbox->setText("Los datos se han actualizado");
-        msgbox->open();
+            this->tienda->ActualizarNombre(formDatos.ObtenerNombre());
+            this->tienda->ActualizarDireccionInternet(formDatos.ObtenerPaginaWeb());
+            this->tienda->ActualizarDireccionFisica(formDatos.ObtenerDireccionFisica());
+            this->tienda->ActualizarTelefono(formDatos.ObtenerTelefono());
+
+            QString stringInfoTienda = QString::fromStdString(tienda->ObtenerDatosYProductos());
+            ui->txtBrwsVentanaInfoTienda->setText(stringInfoTienda);
+
+            QMessageBox *msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Resultado");
+            msgbox->setText("Los datos se han actualizado");
+            msgbox->open();
+        }
+
+        catch(char const *message)
+        {
+            QMessageBox *msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Error");
+            msgbox->setText("El teléfono solamente puede contener caracteres numéricos.\nLos datos NO se actualizaron");
+            msgbox->open();
+        }
+
+        catch(ExcepcionCantidadDeCaracteresTienda &e)
+        {
+            QString mensajeError = e.what();
+
+            QMessageBox *msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Error");
+            msgbox->setText(mensajeError);
+            msgbox->open();
+        }
+
     }
     else
     {
@@ -61,6 +92,7 @@ void MainWindow::on_ActualizarDatos_clicked()
         msgbox->open();
     }
 }
+
 void MainWindow::on_AbrirArchivo_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
@@ -87,7 +119,7 @@ void MainWindow::on_AbrirArchivo_clicked()
         else
         {
             QMessageBox *msgbox = new QMessageBox(this);
-            msgbox->setWindowTitle("Resultado");
+            msgbox->setWindowTitle("Error");
             msgbox->setText("No se pudo abrir el archivo " + fileName + "\n Los datos NO se cargaron.");
             msgbox->open();
         }
@@ -96,6 +128,34 @@ void MainWindow::on_AbrirArchivo_clicked()
 
 void MainWindow::on_Guardar_clicked()
 {
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    "Guardar archivo de datos",
+                                                    "",
+                                                    tr("Archivo de datos (*.dat);;All Files (*)")
+                                                    );
+    if(fileName != "")
+    {
+        std::string name = fileName.toStdString();
+        int resultado = tienda->GuardarDatos(name);
 
+        if(resultado == 0)
+        {
+            QString stringInfoTienda = QString::fromStdString(tienda->ObtenerDatosYProductos());
+            ui->txtBrwsVentanaInfoTienda->setText(stringInfoTienda);
+
+            QMessageBox *msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Resultado");
+            msgbox->setText("Se guardaron los datos en el archivo " + fileName);
+            msgbox->open();
+        }
+
+        else
+        {
+            QMessageBox *msgbox = new QMessageBox(this);
+            msgbox->setWindowTitle("Error");
+            msgbox->setText("No se pudo abrir el archivo " + fileName + "\n Los datos NO se guardaron.");
+            msgbox->open();
+        }
+    }
 }
 
