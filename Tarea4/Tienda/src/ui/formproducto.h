@@ -14,6 +14,11 @@ class FormProducto : public QDialog
 public:
     explicit FormProducto(QWidget *parent = nullptr);
     ~FormProducto();
+    std::string ObtenerID();
+    std::string ObtenerNombre();
+    std::string ObtenerExistencias();
+    void CargarDatosParaModificar(int ID, std::string nombre, int existencias);
+    void CargarDatosParaEliminar(int ID, std::string nombre, int existencias);
 
 private:
     Ui::FormProducto *ui;

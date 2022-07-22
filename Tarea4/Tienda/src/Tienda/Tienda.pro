@@ -16,7 +16,8 @@ SOURCES += \
 
 HEADERS += \
     espacios.h \
-    excepcionCantidadDeCaracteresTienda.h \
+    excepcionNumeroNegativo.h \
+    excepcionProductoExistente.h \
     excepcionProductoInexistente.h \
     producto.h \
     tienda.h

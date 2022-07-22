@@ -9,6 +9,12 @@ Producto::Producto() {
 }
 
 Producto::Producto(int id, string nombre, int existencias){
+
+    if (id < 0 || existencias < 0) {
+        // Escenario de excepción
+        throw ExcepcionNumeroNegativo();
+    }
+
     this->id = id;
     strncpy(this->nombre, nombre.c_str(), sizeof(this->nombre)-1);
     this->existencias = existencias;
@@ -35,6 +41,12 @@ int Producto::ObtenerExistencias(){
 }
 
 void Producto::ActualizarExistencias(int nuevaCantidad){
+
+    if (nuevaCantidad < 0) {
+        // Escenario de excepción
+        throw ExcepcionNumeroNegativo();
+    }
+
     this->existencias = nuevaCantidad;
 }
 

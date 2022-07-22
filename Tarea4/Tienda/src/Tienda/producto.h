@@ -3,6 +3,8 @@
 
 #include <string>
 #include <sstream>
+#include <exception>
+#include "excepcionNumeroNegativo.h"
 
 using namespace std;
 

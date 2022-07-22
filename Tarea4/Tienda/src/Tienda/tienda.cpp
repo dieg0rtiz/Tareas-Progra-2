@@ -1,5 +1,4 @@
 #include "tienda.h"
-#include "espacios.h"
 
 using namespace std;
 
@@ -8,17 +7,6 @@ Tienda::Tienda() {
 }
 
 Tienda::Tienda(string nuevoNombre, string nuevaDireccionInternet, string nuevaDireccionFisica, string nuevoTelefono) {
-
-    if (nuevoNombre.length()>= sizeof(this->nombre) ||
-        nuevaDireccionInternet.length()>= sizeof(this->direccionInternet) ||
-        nuevaDireccionFisica.length()>= sizeof(this->direccionFisica) ||
-        nuevoTelefono.length()>= sizeof(this->telefono)
-        )
-    {
-        // Escenario de excepción
-        throw ExcepcionCantidadDeCaracteresTienda();
-    }
-
     strncpy(this->nombre, nuevoNombre.c_str(),sizeof(this->nombre)-1);
     strncpy(this->direccionInternet, nuevaDireccionInternet.c_str(),sizeof(this->direccionInternet)-1);
     strncpy(this->direccionFisica, nuevaDireccionFisica.c_str(),sizeof(this->direccionFisica)-1);
@@ -48,46 +36,34 @@ string Tienda::ObtenerTelefono() {
 }
 
 void Tienda::ActualizarNombre(string nuevoNombre) {
-
-    if (nuevoNombre.length()>= sizeof(this->nombre)) {
-        // Escenario de excepción
-        throw ExcepcionCantidadDeCaracteresTienda();
-    }
-
     strncpy(this->nombre, nuevoNombre.c_str(),sizeof(this->nombre)-1);
 }
 
 void Tienda::ActualizarDireccionInternet(string nuevaDireccionInternet) {
-
-    if (nuevaDireccionInternet.length()>= sizeof(this->direccionInternet)) {
-        // Escenario de excepción
-        throw ExcepcionCantidadDeCaracteresTienda();
-    }
-
     strncpy(this->direccionInternet, nuevaDireccionInternet.c_str(),sizeof(this->direccionInternet)-1);
 }
 
 void Tienda::ActualizarDireccionFisica(string nuevaDireccionFisica) {
-
-    if (nuevaDireccionFisica.length()>= sizeof(this->direccionFisica)) {
-        // Escenario de excepción
-        throw ExcepcionCantidadDeCaracteresTienda();
-    }
-
     strncpy(this->direccionFisica, nuevaDireccionFisica.c_str(),sizeof(this->direccionFisica)-1);
 }
 
 void Tienda::ActualizarTelefono(string nuevoTelefono) {
-
-    if (nuevoTelefono.length()>= sizeof(this->telefono)) {
-        // Escenario de excepción
-        throw ExcepcionCantidadDeCaracteresTienda();
-    }
-
     strncpy(this->telefono, nuevoTelefono.c_str(),sizeof(this->telefono)-1);
 }
 
 void Tienda::AgregarProducto(int id, string nombre, int existencias) { 
+
+    if (id < 0 || existencias < 0) {
+        // Escenario de excepción
+        throw ExcepcionNumeroNegativo();
+    }
+
+    if (this->VerificarProducto(id))
+    {
+        // Escenario de excepción
+        throw ExcepcionProductoExistente();
+    }
+
     Producto *producto = new Producto(id, nombre, existencias);
     this->indiceProductos.insert( pair<int, Producto *>(producto->ObtenerID(), producto) );
 }
@@ -155,7 +131,7 @@ string Tienda::ObtenerInformacionTienda() {
 string Tienda::ObtenerListaProductos() {
     stringstream strm("");
 
-    strm << "ID            Nombre            Existencias" << endl;
+    strm << "ID                Nombre                Existencias" << endl;
 
     for (auto const& [id,producto] : this->indiceProductos) {
         strm << producto << endl;
@@ -182,6 +158,13 @@ ostream& operator << (ostream &o, const Tienda *tienda) {
 }
 
 int Tienda::ObtenerExistenciasProducto(int id) {
+
+    if (!this->VerificarProducto(id))
+    {
+        // Escenario de excepción
+        throw ExcepcionProductoInexistente();
+    }
+
     return this->indiceProductos.at(id)->ObtenerExistencias();
 }
 
@@ -274,4 +257,15 @@ bool Tienda::VerificarProducto(int idParaVerificar) {
     }
 
     return productoExiste;
+}
+
+string Tienda::ObtenerNombreProducto(int id) {
+
+    if (!this->VerificarProducto(id))
+    {
+        // Escenario de excepción
+        throw ExcepcionProductoInexistente();
+    }
+
+    return this->indiceProductos.at(id)->ObtenerNombre();
 }

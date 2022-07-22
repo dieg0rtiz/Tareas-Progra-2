@@ -10,7 +10,8 @@
 #include <fstream>
 
 #include <exception>
-#include "excepcionCantidadDeCaracteresTienda.h"
+#include "excepcionNumeroNegativo.h"
+#include "excepcionProductoExistente.h"
 #include "excepcionProductoInexistente.h"
 
 class Tienda {
@@ -48,6 +49,7 @@ class Tienda {
     int CargarDatos(string nombreArchivo);
     string ObtenerDatosYProductos();
     bool VerificarProducto(int idParaVerificar);
+    string ObtenerNombreProducto(int id);
 };
 
 #endif // TIENDA_H

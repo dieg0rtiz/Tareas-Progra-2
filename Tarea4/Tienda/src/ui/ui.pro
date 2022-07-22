@@ -10,17 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     formdatostienda.cpp \
+    formid.cpp \
     formproducto.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     formdatostienda.h \
+    formid.h \
     formproducto.h \
     mainwindow.h
 
 FORMS += \
     formdatostienda.ui \
+    formid.ui \
     formproducto.ui \
     mainwindow.ui
 
