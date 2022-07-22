@@ -66,3 +66,4 @@ void FormProducto::CargarDatosParaEliminar(int id, std::string nombre, int exist
     this->ui->txtExistencias->setReadOnly(true);
     this->ui->labelExistenciasInfo->setText("");
 }
+

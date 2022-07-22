@@ -16,3 +16,4 @@ class ExcepcionNumeroNegativo : public std::exception
 };
 
 #endif // EXCEPCIONNUMERONEGATIVO_H
+

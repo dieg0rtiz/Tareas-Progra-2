@@ -406,3 +406,4 @@ void MainWindow::on_txtTelefonoTienda_editingFinished()
     }
 }
 
+

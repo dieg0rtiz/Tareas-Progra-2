@@ -41,3 +41,4 @@ private:
     Tienda *tienda;
 };
 #endif // MAINWINDOW_H
+

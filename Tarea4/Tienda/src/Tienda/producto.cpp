@@ -70,3 +70,4 @@ string Producto::ObtenerInformacionProducto() {
     strm << this;
     return strm.str();
 }
+

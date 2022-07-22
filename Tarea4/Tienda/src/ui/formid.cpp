@@ -28,3 +28,4 @@ void FormID::AsignarInstruccionesEliminar()
 {
     this->ui->labelInstrucciones1->setText("Ingrese el ID del producto que desea eliminar");
 }
+

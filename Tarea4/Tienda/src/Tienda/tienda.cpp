@@ -269,3 +269,4 @@ string Tienda::ObtenerNombreProducto(int id) {
 
     return this->indiceProductos.at(id)->ObtenerNombre();
 }
+
