@@ -1,11 +1,11 @@
 # Tarea 4 - Diego Ortiz - B14815
 ### Instrucciones para utilizar el programa
 #
-1. Abra el proyecto **Tienda.pro** utilizando Qt
+1. Abra el proyecto **Tarea4/Tienda/Tienda.pro** utilizando Qt. No confundir con el archivo Tarea4/Tienda/src/Tienda/Tienda.pro, el cual es una biblioteca estática utilizada en el proyecto.
 
-2. Compile el programa usando la opción **Build**
+2. Compile el programa usando la opción **Build**.
 
-3. Corra el programa usando la opción **Run**
+3. Corra el programa usando la opción **Run**.
 
 4. Se le presentará la ventana principal con datos vacíos.
 
